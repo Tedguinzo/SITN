@@ -1,0 +1,33 @@
+%%file normeL2_bt.m
+function out = normeL2_bt(beta_point)
+    % fonction norme à minimiser dépendant des choix de beta
+    % beta_point : les différentes valeurs de beta choisies équirépartie du temps 0 au temps final
+    
+    global beta gamma mu Mort_data I0 Tf
+    % beta(t) : taux de transmission variable avec le temps
+    % gamma : taux de guérison
+    % mu : taux de mortalité (journalier)
+    % Mort_data : courbe de mortalité provenant des données 
+    % I0 : nb d'infectés au temps 0
+    % Tf : temps final de Mort_data
+    
+    % def de beta(t)
+    Tf = length(Mort_data)-1; 
+    T = linspace(0, Tf, length(param));
+    beta =  @(t) interp1(T, param ,t) ;
+    
+    % Conditions initiales
+    y2 = I0/67012883;    
+    y1 = 1-y2;
+    y3 = 0;
+    y4 = 0;
+  
+    % Déterminer la courbe de mortalité simulé
+    [t,y] = ode45(@SIRD_bt , [0:Tf], [y1 y2 y3 y4]);
+    D = y(:,4);
+    D = D(1:end) - [0 ; D(1:end-1)];
+    
+    % Norme en sortie
+    out = norm(D-Mort_data);
+
+end
