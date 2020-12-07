@@ -15,5 +15,5 @@ function yp = SIRD(t,y)
     global beta gamma mu
     yp = zeros(size(y));
     yp = [ - beta*I*S ; beta*I*S - (gamma+mu)*I ; gamma*I ; mu*I];
-end %IL FALLAIT PAS INVITER LAURENT. Signé : Nicolas
+end %IL FALLAIT PAS INVITER LAURENT. Signé : Nicolaï
 % A quel point ne fallait-il pas m'inviter ?
