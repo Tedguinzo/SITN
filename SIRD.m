@@ -16,3 +16,4 @@ function yp = SIRD(t,y)
     yp = zeros(size(y));
     yp = [ - beta*I*S ; beta*I*S - (gamma+mu)*I ; gamma*I ; mu*I];
 end %IL FALLAIT PAS INVITER LAURENT. Signé : Nicolas
+% A quel point ne fallait-il pas m'inviter ?
